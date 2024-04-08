@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  mongodb-server:
+    build:
+      context: ./db
+    ports:
+      - "8000:8000"
+
+  lambda-replica-server:
+    build:
+      context: ./lambda-replica-server
+    ports:
+      - "8001:8001"
+
+# docker-compose up -d
