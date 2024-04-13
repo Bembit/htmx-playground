@@ -1,26 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100..900&display=swap');
+
+:root {
+    --dark: #000a12;
+    --blue: #5e6ae4;
+    --pink: #a155d0;
+    --blue2: #636eeb;
+    --border-radius: 15px;
+    --light: #f9f9f9;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 20px;
+    padding: 100px 400px;
+    background-color: var(--dark);
+    color: var(--light);
+    font-family: "Lexend Mega", sans-serif;
+    line-height: 1.6;
+    letter-spacing: -2px;
+    font-size: 1rem;
 }
 
-h1 {
-      color: #333;
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4%;
+    row-gap: 50px;
 }
 
-form {
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.room-container {
-    max-width: 400px;
-    margin: 0 auto;
+.container > div {
+    padding: 25px 25px;
+    flex-basis: 48%;
+    border-radius: var(--border-radius);
+    /* display: flex; */
+    /* flex-direction: column; */
 }
 
 label {
     display: block;
     margin-bottom: 5px;
-    color: #555;
+    color: var(--light);
 }
 
 input,
@@ -28,22 +52,74 @@ select {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
-    box-sizing: border-box;
 }
 
 button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
+    background-image: linear-gradient(45deg, var(--blue), var(--pink));
     border: none;
-    border-radius: 4px;
+    color: var(--light);
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 5px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-image: none;
+    background-color: var(--pink);
 }
 
-#room-form {
-    margin-top: 20px;
+button[type="submit"] {
+    margin-top: 1rem;
+}
+
+/* making my own tailwind like no problem */
+
+.wrapper {
+    border-radius: 20px;
+    box-shadow:  2px 2px 60px -12px #636eeb;
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/isolation */
+    /* This property is especially helpful when used in conjunction with mix-blend-mode and z-index. */
+    /* A new stacking context must be created. */
+    isolation: isolate;
+    padding: 50px;
+    position: relative;
+
+}
+
+.wrapper::before {
+    background: linear-gradient(45deg, #5e6ae4 , #a155d0 );
+    inset: -5px;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    border-radius: 20px;
+}
+
+.wrapper::after {
+    background: #000a12;
+    z-index: -1;
+    border-radius: 15px;
+    content: "";
+    inset: 0;
+    position: absolute;
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, #5e6ae4 , #a155d0);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 2rem;
+}
+
+.gradient-text-sm {
+    background: linear-gradient(45deg, #5e6ae4 , #a155d0);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1rem;
 }

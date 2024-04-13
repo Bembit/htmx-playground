@@ -3,7 +3,7 @@ const axios = require('axios');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-const { renderRoomHtml } = require('./renderRoomHtml');
+const { renderPostHtml } = require('./renderPostHtml');
 
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
@@ -19,40 +19,39 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// create-room post request
-
-app.post('/create-room', async (req, res) => {
+// create post request
+app.post('/create', async (req, res) => {
 	try {
 		// Extract parameters from the request body
-		const { name, description, region, maxParticipants } = req.body;
+		const { name, description, tags } = req.body;
 	
 		// Log the incoming request payload for debugging
 		console.log('Incoming Request Payload:', req.body);
 
 		// Log the extracted parameters for debugging
-		console.log('Extracted Parameters:', { name, description, region, maxParticipants });
+		console.log('Extracted Parameters:', { name, description, tags });
 
 		// Example: Make a POST request to MongoDB server
-		const mongoDbResponse = await axios.post(`http://localhost:${process.env.DB_PORT || 8000}/create-room`, {
+		const mongoDbResponse = await axios.post(`http://localhost:${process.env.DB_PORT || 8000}/create`, {
 			name,
 			description,
-			region,
-			maxParticipants,
+			tags
 		});
 	
 		// Check the response from MongoDB server
 		if (mongoDbResponse.status === 200) {
 			console.log('MongoDB server response:', mongoDbResponse.data);
-			// Extract the room data from the MongoDB response
-  			const roomData = mongoDbResponse.data; 
-			// Render HTML for the room
-			const roomHtml = renderRoomHtml(roomData);
+			// Extract the post data from the MongoDB response
+  			const postData = mongoDbResponse.data; 
+			// Render HTML for the post
+			const postHtml = renderPostHtml(postData);
 			// Playing with server-side delays
 			const delayDuration = 700;
 			await new Promise(resolve => setTimeout(resolve, delayDuration));
 			
 			// Send the HTML response to the client
-			res.status(200).send(roomHtml);
+			// res.status(200).send(`<div id="item-container" class="item-container">post created.. name: ${postData.name} ${postHtml} </div>`);
+			res.status(200).send(`<div id="item-container" class="item-container"> ${postHtml} </div>`);
 		} else {
 			// Handle the case when the MongoDB server returns an error
 			console.error('Error from MongoDB server:', mongoDbResponse.data);
@@ -63,6 +62,68 @@ app.post('/create-room', async (req, res) => {
 		// Send an error response
 		res.status(500).json({ error: 'Internal Server Error' });
 	}
+});
+
+// get all posts
+app.get('/posts', async (req, res) => {
+	try {
+		// Example: Make a GET request to MongoDB server
+		const mongoDbResponse = await axios.get(`http://localhost:${process.env.DB_PORT || 8000}/posts`);
+	
+		// Check the response from MongoDB server
+		if (mongoDbResponse.status === 200) {
+			console.log('MongoDB server response:', mongoDbResponse.data);
+			// Extract the post data from the MongoDB response
+  			const postsData = mongoDbResponse.data; 
+			// Render HTML for the post
+			const postsHtml = postsData.map(postData => renderPostHtml(postData)).join('');
+			// Playing with server-side delays
+			// const delayDuration = 700;
+			// await new Promise(resolve => setTimeout(resolve, delayDuration));
+			// Send the HTML response to the client
+			res.status(200).send(postsHtml);
+		} else {
+			// Handle the case when the MongoDB server returns an error
+			console.error('Error from MongoDB server:', mongoDbResponse.data);
+			res.status(500).send('<p>Error from MongoDB server</p>');
+		}
+	} catch (error) {
+		console.error(error);
+		// Send an error response
+		res.status(500).json({ error: 'Internal Server Error' });
+	}
+});
+
+// search for posts by name id tags or description
+app.get('/posts/', async (req, res) => {
+    try {
+        const { query } = req.query;
+
+        // Use a regex to perform a case-insensitive search by post name
+        const regex = new RegExp(query, 'i');
+
+        const searchResults = await post.find({ name: regex });
+
+
+		if (mongoDbResponse.status === 200) {
+			console.log('MongoDB server response:', mongoDbResponse.data);
+			// Extract the post data from the MongoDB response
+  			const postsData = mongoDbResponse.data; 
+			// const postsHtml = postsData.map(postData => renderPostHtml(postData)).join('');
+			// res.status(200).send(postsHtml);
+			res.json(searchResults);
+
+		} else {
+			// Handle the case when the MongoDB server returns an error
+			console.log("fucked it on server side")
+			console.error('Error from MongoDB server:', mongoDbResponse.data);
+			res.status(500).send('<p>Error from MongoDB server</p>');
+		}
+
+    } catch (error) {
+		console.log("fucked it on server side")
+        res.status(500).json({ error: error.message });
+    }
 });
 
 app.listen(PORT, () => {

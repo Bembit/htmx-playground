@@ -3,36 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rooms front-end</title>
+  <title>HTMX playground</title>
   <!-- Include HTMX library -->
   <script src="https://unpkg.com/htmx.org@1.9.10"></script>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
 
-<div id="room-container" class="room-container">
+<div class="container">
+<!-- form container -->
+	<div class="form-container wrapper">
+		<h1 id="post-title" class="gradient-text">HTMX powered.</h1>
 
-	<h1 id="room-title">Create room</h1>
+		<form hx-post="http://localhost:8001/create" hx-target="#item-container" hx-swap="outerHTML">
+	
+			<label class="gradient-text-sm" for="name">Title:</label>
+			<input type="text" id="name" name="name" required autocomplete="off">
+	
+			<label class="gradient-text-sm" for="description">Description:</label>
+			<input type="text" id="description" name="description" required autocomplete="off">
+	
+			<label class="gradient-text-sm" for="tags">Tags / Misc:</label>
+			<input type="text" id="tags" name="tags" required autocomplete="off">
+	
+			<button type="submit">Add post</button>
+		</form>
+	</div>
+<!-- post container -->
+	<div class="wrapper">
+		<h3 class="gradient-text-sm">Post preview will show here.</h3>
+		
+		<div id="item-container" class="item-container">
+			
+		</div>
 
-	<form hx-post="http://localhost:8001/create-room" hx-target="#room-container" hx-swap="outerHTML" hx-ext="json">
+	</div>
 
-		<label for="name">Name:</label>
-		<input type="text" id="name" name="name" required>
+<!-- search container -->
+	<div class="search-container wrapper">
+		<h3 class="gradient-text-sm">Search bar in prog.</h3>
+		<input name="search" hx-post="http://localhost:8001/posts/" type="text" hx-trigger="input changed delay:500ms, search" hx-target="#search-results" />
+		<div id="search-results">Search results container:</div>
+	</div>
+<!-- get all items container -->
+	<!-- <div class="wrapper" style="max-height: 250px;overflow:auto"> -->
+	<div class="wrapper">
+		<button hx-get="http://localhost:8001/posts" hx-target="#items-container">View all posts in DB.</button>
+		<div id="items-container" class="items-container"></div>
+	</div>
 
-		<label for="description">Description:</label>
-		<input type="text" id="description" name="description" required>
-
-		<label for="region">Region:</label>
-		<input type="text" id="region" name="region" required>
-
-		<label for="maxParticipants">Max Participants:</label>
-		<input type="number" id="maxParticipants" name="maxParticipants" required>
-
-
-		<button type="submit">Create room</button>
-	</form>
-
+	<div class="wrapper">Infinite scroll test soon.</div>
+	<div class="wrapper">divs</div>
+	<div class="wrapper">for</div>
+	<div class="wrapper">later</div>
 </div>
+
+	<script>
+		// fuck me, hydration needs to happen first
+		// or I should learn to javascript
+		// probably the latter.
+		const removePostPreview = () => {
+			const element = document.getElementById('swap-container-test');
+			console.log(element);
+			element.remove();
+		}
+	</script>
 
 </body>
 </html>
