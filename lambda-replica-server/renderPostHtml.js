@@ -12,7 +12,7 @@ function renderPostHtml(postData) {
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Description:</strong> ${description}</p>
             
-            <p>there is no delete from DOM in htmx wtf why</p>
+            <div class="side-note">There is no delete from DOM in HTMX.</div>
             <button onclick="removePostPreview()">Remove from DOM</button>
         </div>
     `;

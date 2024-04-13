@@ -1,6 +1,6 @@
-Got tired of setting up a new DB / NodeJS environments for hours every time I just quickly wanted to test some backend functionalities.
+### HTMX Playground
 
-### Getting Started
+Checking and learning more complex features of HTMX. WIP.
 
 1. Clone the repository.
 2. Install dependencies using npm install in both `db` and `lambda-replica-server` folders.

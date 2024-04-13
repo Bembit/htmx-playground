@@ -10,58 +10,19 @@
 </head>
 <body>
 
-<div class="container">
-<!-- form container -->
-	<div class="form-container wrapper">
-		<h1 id="post-title" class="gradient-text">HTMX powered.</h1>
+<header>
+	<a hx-get="./components/main.html" hx-target="#main">Main</a>
+	<a hx-get="./components/search.html" hx-target="#main">Search</a>
+	<a hx-get="./components/transitions.html" hx-target="#main">HTMX CSS transitions</a>
+	<a hx-get="./components/scroll.html" hx-target="#main">Infinite scroll soon</a>
+	<a hx-get="./components/headers-sessions.html" hx-target="#main">Headers / Sessions soon</a>
+</header>
 
-		<form hx-post="http://localhost:8001/create" hx-target="#item-container" hx-swap="outerHTML">
-	
-			<label class="gradient-text-sm" for="name">Title:</label>
-			<input type="text" id="name" name="name" required autocomplete="off">
-	
-			<label class="gradient-text-sm" for="description">Description:</label>
-			<input type="text" id="description" name="description" required autocomplete="off">
-	
-			<label class="gradient-text-sm" for="tags">Tags / Misc:</label>
-			<input type="text" id="tags" name="tags" required autocomplete="off">
-	
-			<button type="submit">Add post</button>
-		</form>
-	</div>
-<!-- post container -->
-	<div class="wrapper">
-		<h3 class="gradient-text-sm">Post preview will show here.</h3>
-		
-		<div id="item-container" class="item-container">
-			
-		</div>
-
-	</div>
-
-<!-- search container -->
-	<div class="search-container wrapper">
-		<h3 class="gradient-text-sm">Search bar in prog.</h3>
-		<input name="search" hx-post="http://localhost:8001/posts/" type="text" hx-trigger="input changed delay:500ms, search" hx-target="#search-results" />
-		<div id="search-results">Search results container:</div>
-	</div>
-<!-- get all items container -->
-	<!-- <div class="wrapper" style="max-height: 250px;overflow:auto"> -->
-	<div class="wrapper">
-		<button hx-get="http://localhost:8001/posts" hx-target="#items-container">View all posts in DB.</button>
-		<div id="items-container" class="items-container"></div>
-	</div>
-
-	<div class="wrapper">Infinite scroll test soon.</div>
-	<div class="wrapper">divs</div>
-	<div class="wrapper">for</div>
-	<div class="wrapper">later</div>
+<div id="main" class="container" hx-get="./components/main.html" hx-trigger="load">
+	<!-- load main content -->
 </div>
 
 	<script>
-		// fuck me, hydration needs to happen first
-		// or I should learn to javascript
-		// probably the latter.
 		const removePostPreview = () => {
 			const element = document.getElementById('swap-container-test');
 			console.log(element);

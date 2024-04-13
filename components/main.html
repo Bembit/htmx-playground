@@ -1,0 +1,45 @@
+<!-- form container -->
+<div class="form-container wrapper">
+    <h1 id="post-title" class="gradient-text">HTMX powered.</h1>
+
+    <form hx-post="http://localhost:8001/create" hx-target="#item-container" hx-swap="outerHTML">
+
+        <label class="gradient-text-sm" for="name">Title:</label>
+        <input type="text" id="name" name="name" required autocomplete="off">
+
+        <label class="gradient-text-sm" for="description">Description:</label>
+        <input type="text" id="description" name="description" required autocomplete="off">
+
+        <label class="gradient-text-sm" for="tags">Tags / Misc:</label>
+        <input type="text" id="tags" name="tags" required autocomplete="off">
+
+        <button type="submit">Add post</button>
+    </form>
+</div>
+<!-- post container -->
+<div class="wrapper">
+    <h3 class="gradient-text-sm">Post preview will show here.</h3>
+    
+    <div id="item-container" class="item-container">
+        
+    </div>
+
+</div>
+
+<!-- search container -->
+<div class="search-container wrapper">
+    <h3 class="gradient-text-sm">Search bar in prog.</h3>
+    <input name="search" hx-post="http://localhost:8001/posts/" type="text" hx-trigger="input changed delay:500ms, search" hx-target="#search-results" />
+    <div id="search-results">Search results container:</div>
+</div>
+<!-- get all items container -->
+<!-- <div class="wrapper" style="max-height: 250px;overflow:auto"> -->
+<div class="wrapper">
+    <button hx-get="http://localhost:8001/posts" hx-target="#items-container">View all posts in DB.</button>
+    <div id="items-container" class="items-container"></div>
+</div>
+
+<div class="wrapper">Infinite scroll test soon.</div>
+<div class="wrapper">divs</div>
+<div class="wrapper">for</div>
+<div class="wrapper">later</div>

@@ -4,6 +4,7 @@
     --dark: #000a12;
     --blue: #5e6ae4;
     --pink: #a155d0;
+    --pink-dimmed: #e4b8ff20;
     --blue2: #636eeb;
     --border-radius: 15px;
     --light: #f9f9f9;
@@ -16,7 +17,6 @@
 }
 
 body {
-    padding: 100px 400px;
     background-color: var(--dark);
     color: var(--light);
     font-family: "Lexend Mega", sans-serif;
@@ -25,7 +25,45 @@ body {
     font-size: 1rem;
 }
 
+a, a:visited {
+    color: var(--pink);
+    text-decoration: none;
+}
+
+a {
+    transition: all 0.3s ease-in-out;
+    margin-right: 25px;
+    font-weight: 900;
+}
+
+a:hover {
+    color: var(--light);
+    cursor: pointer;
+}
+
+header {
+    position: relative;
+    height: 50px;
+    padding: 0px 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+header::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    content: '';
+    width: 100%;
+    background-color: var(--blue2);
+    height: 5px;
+}
+
 .container {
+    padding: 0px 400px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -37,8 +75,6 @@ body {
     padding: 25px 25px;
     flex-basis: 48%;
     border-radius: var(--border-radius);
-    /* display: flex; */
-    /* flex-direction: column; */
 }
 
 label {
@@ -49,9 +85,20 @@ label {
 
 input,
 select {
+    border: 2px solid var(--blue);
+    background-color: var(--pink-dimmed);
+    color: var(--pink);
+    border-radius: 5px;
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border: 2px solid var(--pink);
 }
 
 button {
@@ -74,14 +121,18 @@ button[type="submit"] {
     margin-top: 1rem;
 }
 
-/* making my own tailwind like no problem */
+.side-note {
+    background-color: var(--pink-dimmed);
+    padding: 7px;
+    border-radius: 5px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
 
 .wrapper {
     border-radius: 20px;
     box-shadow:  2px 2px 60px -12px #636eeb;
-    /* https://developer.mozilla.org/en-US/docs/Web/CSS/isolation */
-    /* This property is especially helpful when used in conjunction with mix-blend-mode and z-index. */
-    /* A new stacking context must be created. */
     isolation: isolate;
     padding: 50px;
     position: relative;
