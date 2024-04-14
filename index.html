@@ -4,24 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HTMX playground</title>
-  <!-- Include HTMX library -->
-  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.11/dist/ext/debug.js"></script>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
 
-<header>
-	<a hx-get="./components/main.html" hx-target="#main">Main</a>
-	<a hx-get="./components/search.html" hx-target="#main">Search</a>
-	<a hx-get="./components/transitions.html" hx-target="#main">HTMX CSS transitions</a>
-	<a hx-get="./components/scroll.html" hx-target="#main">Infinite scroll soon</a>
-	<a hx-get="./components/headers-sessions.html" hx-target="#main">Headers / Sessions soon</a>
+<header hx-get="./components/navigation.html" hx-trigger="load">
+	<!-- load navigation -->
 </header>
 
-<div id="main" class="container" hx-get="./components/main.html" hx-trigger="load">
-	<!-- load main content -->
-</div>
+<!-- this will be the modal -->
+<p class="toast-note">Dev experience is around 3.6 roentgen so far.</p>
 
+<div id="main" class="container" hx-get="./components/main.html" hx-trigger="load">
+	<!-- load screens to #main default is main -->
+</div>
+<!-- trying to keep the javascript at minimum for this one. we'll see. :) -->
 	<script>
 		const removePostPreview = () => {
 			const element = document.getElementById('swap-container-test');
@@ -29,6 +28,5 @@
 			element.remove();
 		}
 	</script>
-
 </body>
 </html>

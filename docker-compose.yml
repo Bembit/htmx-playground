@@ -7,9 +7,9 @@ services:
     ports:
       - "8000:8000"
 
-  lambda-replica-server:
+  server:
     build:
-      context: ./lambda-replica-server
+      context: ./server
     ports:
       - "8001:8001"
 

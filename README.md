@@ -2,8 +2,18 @@
 
 Checking and learning more complex features of HTMX. WIP.
 
+Trying to keep the backend as minimal as possible because it already looks like someone just sneezed on the keyboard, tried to clean it up and ended up with this.
+
+<!-- split components further -->
+<!-- finish db search -->
+<!-- remove nsfw comments as usual -->
+<!-- add screen, do readme -->
+
+0. Added a powershell script as `start.ps1` to start all the required things. Probably will extend to install. Or not.
+ - `If you are on Linux`, you probably won't clone and run random code from random people of the internet, and you also hate mongodb more than anyone on the planet.
+
 1. Clone the repository.
-2. Install dependencies using npm install in both `db` and `lambda-replica-server` folders.
+2. Install dependencies using npm install in both `db` and `server` folders.
 2. Optional - Docker - Work In Progress
 3. Install MongoDB locally. I used 7.0.4 on Windows with Compass.
 4. Start the MongoDB Server. **Default port is 8000. You can change it in the .env file.**
@@ -13,9 +23,9 @@ node app.js
 # or use the nodemon scripts with
 npm run dev
 ```
-5. Start the Lambda Replica Server. **Default port is 8001. You can change it in the .env file.**
+5. Start the Server. **Default port is 8001. You can change it in the .env file.**
 ```bash
-cd lambda-replica-server
+cd server
 node app.js
 # or use the nodemon scripts with
 npm run dev

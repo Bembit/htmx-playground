@@ -77,9 +77,6 @@ app.get('/posts', async (req, res) => {
   			const postsData = mongoDbResponse.data; 
 			// Render HTML for the post
 			const postsHtml = postsData.map(postData => renderPostHtml(postData)).join('');
-			// Playing with server-side delays
-			// const delayDuration = 700;
-			// await new Promise(resolve => setTimeout(resolve, delayDuration));
 			// Send the HTML response to the client
 			res.status(200).send(postsHtml);
 		} else {
@@ -94,38 +91,32 @@ app.get('/posts', async (req, res) => {
 	}
 });
 
-// search for posts by name id tags or description
-app.get('/posts/', async (req, res) => {
-    try {
-        const { query } = req.query;
-
-        // Use a regex to perform a case-insensitive search by post name
-        const regex = new RegExp(query, 'i');
-
-        const searchResults = await post.find({ name: regex });
-
-
+// get posts by id
+app.get('/posts/:id', async (req, res) => {
+	try {
+		// Example: Make a GET request to MongoDB server
+		const mongoDbResponse = await axios.get(`http://localhost:${process.env.DB_PORT || 8000}/posts/${req.params.id}`);
+	
+		// Check the response from MongoDB server
 		if (mongoDbResponse.status === 200) {
 			console.log('MongoDB server response:', mongoDbResponse.data);
 			// Extract the post data from the MongoDB response
-  			const postsData = mongoDbResponse.data; 
-			// const postsHtml = postsData.map(postData => renderPostHtml(postData)).join('');
-			// res.status(200).send(postsHtml);
-			res.json(searchResults);
-
+  			const postData = mongoDbResponse.data; 
+			// Render HTML for the post
+			const postHtml = renderPostHtml(postData);
+			res.status(200).send(postHtml);
 		} else {
 			// Handle the case when the MongoDB server returns an error
-			console.log("fucked it on server side")
 			console.error('Error from MongoDB server:', mongoDbResponse.data);
 			res.status(500).send('<p>Error from MongoDB server</p>');
 		}
-
-    } catch (error) {
-		console.log("fucked it on server side")
-        res.status(500).json({ error: error.message });
-    }
+	} catch (error) {
+		console.error(error);
+		// Send an error response
+		res.status(500).json({ error: 'Internal Server Error' });
+	}
 });
 
 app.listen(PORT, () => {
- 	 console.log(`Lambda Replica Server is running at http://localhost:${PORT}`);
+ 	 console.log(`Server is running at http://localhost:${PORT}`);
 });

@@ -1,4 +1,4 @@
-### Lambda Replica Server (lambda-replica-server)
+### Server
 **app.js**
 - Entry point for the Express application.
 - Listens for POST requests on /create.
