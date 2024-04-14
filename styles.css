@@ -151,6 +151,25 @@ button[type="submit"] {
     width: 500px;
 }
 
+.search-results {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    border-radius: 5px;
+    border: 2px solid var(--blue);
+    padding: 2rem 2rem;
+    background-color: #000;
+}
+
+.preview-container {
+    text-transform: capitalize;
+}
+
+hr {
+    margin-top: 1rem;
+}
+
 .wrapper {
     border-radius: 20px;
     box-shadow:  2px 2px 60px -12px #636eeb;

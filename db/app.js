@@ -53,8 +53,18 @@ app.get('/posts/:id', async (req, res) => {
 	}
 });
 
+// get posts route and return the json response
+app.get('/posts', async (req, res) => {
+    try {
+        const posts = await Post.find();
+        res.json(posts);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // Example route to search for posts based on the query
-app.get('/posts/', async (req, res) => {
+app.get('/search/', async (req, res) => {
     try {
         const searchTerm = req.query.query;
         

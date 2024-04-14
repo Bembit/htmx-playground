@@ -1,16 +1,12 @@
 ### HTMX Playground
 
-Checking and learning more complex features of HTMX. WIP.
+Checking and learning more complex features of HTMX.
 
 Trying to keep the backend as minimal as possible because it already looks like someone just sneezed on the keyboard, tried to clean it up and ended up with this.
 
-<!-- split components further -->
-<!-- finish db search -->
-<!-- remove nsfw comments as usual -->
-<!-- add screen, do readme -->
+<img src="./wip.png" width="100%" />
 
-0. Added a powershell script as `start.ps1` to start all the required things. Probably will extend to install. Or not.
- - `If you are on Linux`, you probably won't clone and run random code from random people of the internet, and you also hate mongodb more than anyone on the planet.
+0. Added a powershell script as `start.ps1` to start all the required things. Probably will extend to install. Or not. `If you are on Linux`, you probably won't clone and run random code from random people of the internet, and you also hate mongodb more than anyone on the planet.
 
 1. Clone the repository.
 2. Install dependencies using npm install in both `db` and `server` folders.

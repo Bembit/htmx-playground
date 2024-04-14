@@ -1,1 +1,11 @@
-<h1 class="gradient-text">Search</h1>
+<div class="search-container wrapper">
+    <h3 class="gradient-text-sm">Search bar in progress.</h3>
+    <input name="query" hx-get="http://localhost:8000/search/" type="text" hx-trigger="input changed delay:500ms, query" hx-target="#search-results" hx-ext="debug" />
+    <div id="search-results" class="search-results"><span>Search results container.</span></div>
+    <p class="side-note">hx-trigger="input changed delay:500ms, query" -- this sends a /posts/?query="whatever" to the server on change</p>
+    <p class="warning-note">Implementing a search function that goes through multiple servers is harder than this demo deserves so I opted for opening CORS between frontend and the db for now. I have enough gray hair as is and mongodb regex queries do not help.
+    </p>
+    <p class="warning-note">
+        I also spent an hour asking for the developer replacement AI tools for an implementation, and guess what? Turns out generating random text doesn't solve all the issues just yet.
+    </p>
+</div>
