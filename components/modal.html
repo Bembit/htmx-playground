@@ -1,1 +1,14 @@
-<h1 class="gradient-text">Modal</h1>
+<div id="modal" class="modal">
+	<div onclick="removeModal()" class="modal-underlay"></div>
+	<div class="modal-content">
+		<h1 class="gradient-text">Official docs test</h1>
+
+		<p>https://htmx.org/examples/modal-custom/</p>
+
+		<div hx-get="https://htmx.org/examples/modal-custom/" hx-swap="innerHTML" hx-trigger="click" class="modal-wrapper">
+
+		</div>
+		<br>
+		<button onclick="removeModal()">Close</button>
+	</div>
+</div>

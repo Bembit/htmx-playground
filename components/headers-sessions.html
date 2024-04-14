@@ -1,1 +1,42 @@
-<h1 class="gradient-text">Headers-Sessions</h1>
+
+<div class="wrapper">
+    <h1 class="gradient-text">Headers-Sessions</h1>
+    <h3 class="gradient-text-sm">All fun and games until this point, this will be the bigboy league.</h3>
+    <p class="warning-note">fakestore api works just fine</p>
+</div>
+
+<div class="wrapper" hx-get="https://fakestoreapi.com/products/1" hx-swap="innerHTML" hx-trigger="load">
+    fakestore api query
+</div>
+
+<div class="wrapper">
+
+    <a href="https://github.com/bigskysoftware/htmx/issues/779">https://github.com/bigskysoftware/htmx/issues/779</a>
+    <a href="https://htmx.org/attributes/hx-headers/">https://htmx.org/attributes/hx-headers/</a>
+    <a href="https://htmx.org/attributes/hx-request/">https://htmx.org/attributes/hx-request/</a>
+    <a href="https://htmx.org/reference/#config">https://htmx.org/reference/#config</a>
+    <a href="https://htmx.org/events/#htmx:configRequest">https://htmx.org/events/#htmx:configRequest</a>
+
+</div>
+
+<div class="wrapper">
+
+    <p> Remove all extra htmx headers, re-add content-type.
+        document.body.addEventListener('htmx:configRequest', function(event) {
+        event.detail.headers = ''
+        event.detail.headers['Content-Type'] = "application/x-www-form-urlencoded; charset=UTF-8"
+        });
+    </p>
+
+    <p>hx-boost="false"</p>
+
+    <p>hx-request='{"noHeaders": true}'</p>
+
+    <p>htmx.config.withCredentials</p>
+    <p>https://htmx.org/events/#htmx:configRequest</p>
+
+    <p>hx-on="htmx:configRequest: event.detail.headers['Content-Type']='application/x-www-form-urlencoded; charset=UTF-8'"</p>
+
+    <div hx-on="htmx:configRequest: event.detail.headers=''; event.detail.headers['Content-Type']='application/x-www-form-urlencoded; charset=UTF-8'"></div>
+
+</div>

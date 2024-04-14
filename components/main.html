@@ -1,7 +1,9 @@
     <!-- form container -->
     <div class="form-container wrapper">
         <h1 id="post-title" class="gradient-text">HTMX powered.</h1>
-
+        
+        <button hx-get="./components/modal.html" hx-target="body" hx-swap="beforeend">Modal WIP</button>
+        
         <form hx-post="http://localhost:8001/create" hx-target="#item-container" hx-swap="outerHTML">
 
             <label class="gradient-text-sm" for="name">Title:</label>
