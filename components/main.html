@@ -2,7 +2,7 @@
     <div class="form-container wrapper">
         <h1 id="post-title" class="gradient-text">HTMX powered.</h1>
         
-        <button hx-get="./components/modal.html" hx-target="body" hx-swap="beforeend">Modal WIP</button>
+        <button hx-get="./components/modal.html" hx-target="body" hx-swap="beforeend">Modal test</button>
         
         <form hx-post="http://localhost:8001/create" hx-target="#item-container" hx-swap="outerHTML">
 
@@ -33,21 +33,16 @@
         <!-- load search component -->
     </div>
 
-    <!-- <div class="wrapper" style="max-height: 250px;overflow:auto"> -->
     <div id="preview-container" class="wrapper"><h3 class="gradient-text-sm">Container to open /posts/:id with HTMX</h3></div>
     <!-- get all items container -->
     <div class="wrapper">
         <button hx-get="http://localhost:8001/posts" hx-target="#items-container">View all posts in DB.</button>
         <div id="items-container" class="items-container">
-            <p class="warning-note">Moving errors from block to block. It's just web development. 💖 </p>
-            <p class="warning-note">So I remade the db response to send html, however the server needs JSON. 🥲</p>
+            <p class="warning-note">Moving errors from block to block. It's just web development.</p>
+            <p class="warning-note">So I remade the db response to send html.</p>
             <p class="warning-note">Ok, I made a separate /search route for searching and I can keep returning my million dollar renderHTML.js here.</p>
             <p class="warning-note">Would be interesting to add an auto polling for search results after the input.</p>
         </div>
     </div>
 
-    <div class="wrapper">asd</div>
-    <div class="wrapper">a modal would be nice</div>
-    <div class="wrapper">and a dropdown</div>
-    <!-- <div class="wrapper">for</div>
-    <div class="wrapper">later</div> -->
+    <div class="wrapper">Container</div>

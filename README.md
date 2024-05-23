@@ -1,8 +1,10 @@
 ### HTMX Playground
 
-Checking and learning more complex features of HTMX.
+I built this demo to learn more about HTMX.
 
 <img src="./wip.png" width="100%" />
+
+Backend for it is a simple Express server with MongoDB and some vanilla rendering.
 
 1. Clone the repository.
 2. Install dependencies using npm install in both `db` and `server` folders.
