@@ -31,9 +31,10 @@
 
             htmx.ajax('GET', event.state.url, { target: target });
         }
+        // this fallback to / as /index
         if (window.location.pathname === '/' || window.location.pathname === '') {
             
-            history.replaceState({url: '/', target: '#main'}, "", '/');
+            history.replaceState({url: '/', target: 'body'}, "", '/');
         }
     });
 
