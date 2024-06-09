@@ -27,9 +27,8 @@
         if (event.state && event.state.url) {
             const target = event.state.target || '#main';
 
-            // fallback to the main target if no target is specified
             console.log('popstate', event.state.url);
-			// ?????????? read the hx target of the clicked anchor an initiataor. target from somewhere
+
             htmx.ajax('GET', event.state.url, { target: target });
         }
         if (window.location.pathname === '/' || window.location.pathname === '') {
