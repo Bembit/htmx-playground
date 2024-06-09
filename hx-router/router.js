@@ -10,13 +10,24 @@
         onEvent: function(name, evt) {
             if (name === "htmx:configRequest") {
                 const target = evt.detail.elt;
-                const url = (target.getAttribute('hx-get') || target.getAttribute('href')) || target.getAttribute('hx-post') || target.getAttribute('hx-put') || target.getAttribute('hx-delete');
+                // revisit this
+                const url = 
+                (target.getAttribute('hx-get')
+                || target.getAttribute('href'))
+                || target.getAttribute('hx-post')
+                || target.getAttribute('hx-put')
+                || target.getAttribute('hx-delete');
+                
                 const targetSelector = target.getAttribute('hx-target');
+                // custom attributes for meta tags ?
+                const pageTitle = target.getAttribute('hx-page-title') || document.title;
+
                 if (url) {
                     console.log(target);
                     console.log('url', url);
                     history.pushState({url: url, target: targetSelector}, "", url);
-                    evt.detail.url = url;
+                    console.log('evt.detail.url', evt.detail.url);
+                    document.title = pageTitle;
                 }
             }
         }
@@ -24,17 +35,21 @@
 
     window.addEventListener('popstate', function(event) {
         if (event.state && event.state.url) {
+            
             const target = event.state.target;
+            const pageTitle = event.state.title;
 
+            console.log('target', target);
+            console.log('title', event.state.title);
             console.log('popstate', event.state.url);
-
-            htmx.ajax('GET', event.state.url, { target: target });
+            
+            // page title needs to be updated in popstate too, in the DOM
+            htmx.ajax('GET', event.state.url, { target: target, title: pageTitle});
+            // document.title = pageTitle;
         }
         // this fallback to / as /index
-        // still a FPR
         if (window.location.pathname === '/' || window.location.pathname === '') {
-            
-            history.replaceState({url: '/', target: 'main'}, "", '/');
+            history.replaceState({url: '/', target: 'main', title: 'HTMX Playground'}, "", '/');
         }
     });
 
