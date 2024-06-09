@@ -1,36 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HTMX playground</title>
-  <script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/htmx.org@1.9.11/dist/ext/debug.js"></script>
-  <link rel="stylesheet" href="./styles.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="A playground for HTMX">
+	<title>HTMX playground</title>
+	<script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
+	<script src="./hx-router/router.js" defer></script>
+	<script src="https://unpkg.com/htmx.org@1.9.11/dist/ext/debug.js"></script>
+	<link rel="stylesheet" href="./styles.css">
 </head>
 <body>
 
-<header hx-get="./components/navigation.html" hx-trigger="load">
-	<!-- load navigation -->
+<!-- <header hx-get="/components/navigation.html" hx-trigger="load"> -->
+<header>
+	<a 
+		hx-get="/components/main.html"
+		href="/components/main.html"
+		hx-ext="router"
+		hx-target="#main"
+		hx-swap="innerHTML transition:true"
+		hx-page-title="Home Component"
+		hx-meta-description="A playground for HTMX"
+	>
+		Main
+	</a>
+	
+	<a hx-get="/components/search.html" href="/components/search.html" hx-ext="router" hx-target="#main" hx-swap="innerHTML transition:true" hx-page-title="Search Component" hx-meta-description="Search with HTMX.">Search</a>
+	<a hx-get="/components/headers-sessions.html" href="/components/headers-sessions.html" hx-ext="router" hx-target="#main" hx-swap="innerHTML transition:true" hx-page-title="Unfinished Component" hx-meta-description="Unfinished...">Headers-sessions</a>
 </header>
 
 <!-- this will be the modal -->
 <p class="toast-note">Dev experience is pretty good.</p>
 
-<div id="main" class="container" hx-get="./components/main.html" hx-trigger="load">
+<div id="main" class="container slide-it" hx-get="/components/main.html" hx-trigger="load">
 	<!-- load screens to #main default is main -->
 </div>
-<!-- trying to keep the javascript at minimum for this one. we'll see. :) -->
 	<script>
-		const removePostPreview = () => {
-			const element = document.getElementById('swap-container-test');
-			console.log(element);
-			element.remove();
-		}
-		const removeModal = () => {
-			const element = document.getElementById('modal');
-			element.remove();
-		}
+		document.addEventListener('DOMContentLoaded', function() {
+			const removePostPreview = () => {
+				const element = document.getElementById('swap-container-test');
+				console.log(element);
+				element.remove();
+			}
+			const removeModal = () => {
+				const element = document.getElementById('modal');
+				element.remove();
+			}
+		});		
+	
 	</script>
 </body>
 </html>
