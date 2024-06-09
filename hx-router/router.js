@@ -11,7 +11,6 @@
             if (name === "htmx:configRequest") {
                 const target = evt.detail.elt;
                 const url = (target.getAttribute('hx-get') || target.getAttribute('href')) || target.getAttribute('hx-post') || target.getAttribute('hx-put') || target.getAttribute('hx-delete');
-                // need to get the target from the hx-target attribute to deal with popstate later
                 const targetSelector = target.getAttribute('hx-target');
                 if (url) {
                     console.log(target);
@@ -25,16 +24,17 @@
 
     window.addEventListener('popstate', function(event) {
         if (event.state && event.state.url) {
-            const target = event.state.target || '#main';
+            const target = event.state.target;
 
             console.log('popstate', event.state.url);
 
             htmx.ajax('GET', event.state.url, { target: target });
         }
         // this fallback to / as /index
+        // still a FPR
         if (window.location.pathname === '/' || window.location.pathname === '') {
             
-            history.replaceState({url: '/', target: 'body'}, "", '/');
+            history.replaceState({url: '/', target: 'main'}, "", '/');
         }
     });
 
